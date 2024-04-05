@@ -1,4 +1,5 @@
-﻿using DevIO.UI.Site.Modulos.Vendas.Data;
+﻿using DevIO.UI.Site.Data;
+using DevIO.UI.Site.Servicos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using System;
 
 namespace DevIO.UI.Site
 {
@@ -35,6 +36,15 @@ namespace DevIO.UI.Site
             options.UseSqlServer(Configuration.GetConnectionString("MeuDbContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
+
+            services.AddTransient<IOperacaoTransient, Operacao>();
+            services.AddScoped<IOperacaoScoped, Operacao>();
+            services.AddSingleton<IOperacaoSingleton, Operacao>();
+            services.AddSingleton<IOperacaoSingletonInstance>(new Operacao(Guid.Empty));
+
+            services.AddTransient<OperacaoService>();
         }
         //Estudos
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

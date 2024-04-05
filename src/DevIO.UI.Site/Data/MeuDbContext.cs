@@ -1,7 +1,8 @@
 ﻿
+using DevIO.UI.Site.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevIO.UI.Site.Modulos.Vendas.Data
+namespace DevIO.UI.Site.Data
 {
     public class MeuDbContext : DbContext
     {
@@ -9,6 +10,8 @@ namespace DevIO.UI.Site.Modulos.Vendas.Data
         {
 
         }
+
+        public DbSet<Aluno> Alunos { get; set; }
     }
 
 }
