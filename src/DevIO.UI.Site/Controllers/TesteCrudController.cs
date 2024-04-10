@@ -40,7 +40,7 @@ namespace DevIO.UI.Site.Controllers
             _context.Alunos.Remove(aluno);
             _context.SaveChanges();
 
-            return View("_Layout");
+            return View("Home");
         }
     }
 
